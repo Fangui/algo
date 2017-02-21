@@ -4,14 +4,14 @@
 struct rbt
 {
   int key, red;
-  struct rbt **left, **right;
+  struct rbt *left, *right;
 };
 
-void buildRbt();
+struct rbt *buildRbt();
 
-void printTree(struct rbt);
+void printTree(struct rbt *rbt);
 
-void rr(struct rbt);
+void rr(struct rbt *rbt);
 
 
 
