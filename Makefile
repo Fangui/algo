@@ -6,7 +6,7 @@ CFLAGS= -Wall -Wextra -Werror -std=c99 -pedantic -o -g
 LDFLAGS=
 LDLIBS= -lm
 
-SRC= *.c
+SRC= queue.c binTree.c 
 
 OBJ= ${SRC:.c=.o}
  

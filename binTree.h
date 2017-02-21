@@ -1,17 +1,19 @@
-# include <stdlib.h>
-# include <stdio.h>
+# include "queue.h"
 
 struct binTree
 {
-  int node;
+  int key;
   struct binTree *left, *right;
 };
 
-struct binTree *newBinTree(int node, struct binTree *left, struct binTree *right);
+struct binTree *newBinTree(int key, struct binTree *left, struct binTree *right);
 
 void freeTree(struct binTree *tree);
 
 void printTree(struct binTree *tree);
 
-void addBinTree(struct binTree *tree, int node);
+int findValue(struct binTree *tree, int key);
 
+void addBinTree(struct binTree *tree, int key);
+
+int height(struct binTree *tree);

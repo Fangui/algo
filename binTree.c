@@ -1,11 +1,11 @@
 # include "binTree.h"
 
-struct binTree *newBinTree(int node, struct binTree *left, struct binTree *right)
+struct binTree *newBinTree(int key, struct binTree *left, struct binTree *right)
 {
   struct binTree *tree = malloc(sizeof(struct binTree));
   tree->left = left;
   tree->right = right;
-  tree->node = node;
+  tree->key = key;
   return tree;
 }
 
@@ -21,37 +21,87 @@ void freeTree(struct binTree *tree)
 
 void printTree(struct binTree *tree)
 {
+  struct binTree *node;
+  struct queue *queue = malloc(sizeof(struct queue));
+
   if(tree)
   {
-    printf("%d\n", tree->node);
-    printTree(tree->left);
-    printTree(tree->right);
+    queue_init(queue);
+    queue_push(queue, tree);
+    queue_push(queue, NULL);
+    while(!queue_is_empty(queue))
+    {
+       node = queue_pop(queue);
+       if(node)
+       {
+         printf("%d ", node->key);
+         if(node->left)
+           queue_push(queue, node->left);
+         if(node->right)
+           queue_push(queue, node->right);
+       }
+       else
+       {
+         printf("\n");
+         if(!queue_is_empty(queue))
+           queue_push(queue,NULL);
+       }
+    }
+  free(queue);
   }
 }
 
-void addBinTree(struct binTree *tree, int node)
+
+int findValue(struct binTree *tree, int node)
+{
+  while(tree)
+  {
+    if(node > tree->key)
+      tree = tree->right;
+    else if(node < tree->key)
+      tree = tree->left;
+    else
+      return 1;
+  }
+  return 0;
+}
+
+void addBinTree(struct binTree *tree, int key)
 {
   if(tree)
   {
-    if(node > tree->node)
+    if(key > tree->key)
     {
       if(!tree->right)
       {
-        struct binTree *ins = newBinTree(node, NULL, NULL);
+        struct binTree *ins = newBinTree(key, NULL, NULL);
         tree->right = ins;
       }
       else
-        addBinTree(tree->right, node);
+        addBinTree(tree->right, key);
     }
-    else if(node < tree->node)
+    else if(key < tree->key)
     {
       if(!tree->left)
       {
-        struct binTree *ins = newBinTree(node, NULL, NULL);
+        struct binTree *ins = newBinTree(key, NULL, NULL);
         tree->left = ins;
       }
       else
-        addBinTree(tree->left, node);
+        addBinTree(tree->left, key);
     }
   }
 }
+
+static inline int max(int a, int b)
+{
+  return a > b ? a : b;  
+}
+
+int height(struct binTree *t)
+{
+  if(!t)
+    return -1;
+  return max(1 + height(t->left), 1 + height(t->right));
+}
+
