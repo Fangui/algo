@@ -10,9 +10,11 @@ int main()
   addBinTree(tree, 0);
   addBinTree(tree, 2);
   printTree(tree);
-  printf("%d\n", findValue(tree, 15));
-  printf("%d\n", findValue(tree, 5));
-  printf("%d\n", height(tree));
+  supNode(tree, 9);
+  supNode(tree, 25);
+  printTree(tree);
+  supNode(tree, 15);
+  printTree(tree);
   freeTree(tree);
   return 0;
 }

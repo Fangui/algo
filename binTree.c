@@ -51,6 +51,17 @@ void printTree(struct binTree *tree)
   }
 }
 
+static inline int max(int a, int b)
+{
+  return a > b ? a : b;  
+}
+
+int height(struct binTree *t)
+{
+  if(!t)
+    return -1;
+  return max(1 + height(t->left), 1 + height(t->right));
+}
 
 int findValue(struct binTree *tree, int node)
 {
@@ -93,15 +104,42 @@ void addBinTree(struct binTree *tree, int key)
   }
 }
 
-static inline int max(int a, int b)
+void supNode(struct binTree *tree, int key)
 {
-  return a > b ? a : b;  
+  struct binTree *p = NULL;
+  while(tree)
+  {
+    if(key > tree->key)
+    {
+      p = tree;
+      tree = tree->right;
+    }
+    else if(key < tree->key)
+    {
+      p = tree;
+      tree = tree->left;
+    }
+    else
+    {
+      if(!p)
+      {
+        free(tree);
+        return;
+      }
+      struct binTree *del = tree;
+      if(key < p->key)
+        p->left = del->left;
+      else
+        p->right = del->left;
+
+      for(p = del->left; p->right; p = p->right){}
+      p->right = del->right;
+ 
+      free(del);
+      return;
+    }
+  }
 }
 
-int height(struct binTree *t)
-{
-  if(!t)
-    return -1;
-  return max(1 + height(t->left), 1 + height(t->right));
-}
+
 

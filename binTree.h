@@ -12,8 +12,11 @@ void freeTree(struct binTree *tree);
 
 void printTree(struct binTree *tree);
 
+int height(struct binTree *tree);
+
 int findValue(struct binTree *tree, int key);
 
 void addBinTree(struct binTree *tree, int key);
 
-int height(struct binTree *tree);
+void supNode(struct binTree *tree, int key);
+
