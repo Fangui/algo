@@ -9,12 +9,14 @@ int main()
   addBinTree(tree, 17);
   addBinTree(tree, 0);
   addBinTree(tree, 2);
+  printf("%d\n", size(tree));
   printTree(tree);
+  printf("\n");
   supNode(tree, 9);
   supNode(tree, 25);
-  printTree(tree);
+//  printTree(tree);
   supNode(tree, 15);
-  printTree(tree);
+//  printTree(tree);
   freeTree(tree);
   return 0;
 }

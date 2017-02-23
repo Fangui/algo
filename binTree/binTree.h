@@ -1,4 +1,4 @@
-# include "queue.h"
+# include "../queue.h"
 
 struct binTree
 {
@@ -11,6 +11,8 @@ struct binTree *newBinTree(int key, struct binTree *left, struct binTree *right)
 void freeTree(struct binTree *tree);
 
 void printTree(struct binTree *tree);
+
+int size(struct binTree *tree);
 
 int height(struct binTree *tree);
 

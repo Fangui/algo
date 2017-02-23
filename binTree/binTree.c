@@ -1,4 +1,5 @@
 # include "binTree.h"
+# include "string.h"
 
 struct binTree *newBinTree(int key, struct binTree *left, struct binTree *right)
 {
@@ -19,7 +20,13 @@ void freeTree(struct binTree *tree)
   }
 }
 
-void printTree(struct binTree *tree)
+int size(struct binTree *tree)
+{
+  if(tree)
+    return 1 + size(tree->left) + size(tree->right);
+  return 0;
+}
+void p_bfs(struct binTree *tree)
 {
   struct binTree *node;
   struct queue *queue = malloc(sizeof(struct queue));
@@ -49,6 +56,28 @@ void printTree(struct binTree *tree)
     }
   free(queue);
   }
+}
+
+static void _printTree(struct binTree *tree)
+{
+  if(!tree->left && ! tree->right)
+    printf("%d  ", tree->key);
+  if(tree->left)
+  {
+    printf("%dl->", tree->key);
+    printTree(tree->left);
+  }
+  if(tree->right)
+  {
+    printf("%dr->", tree->key);
+    printTree(tree->right);
+  }
+}
+
+void printTree(struct binTree *tree)
+{
+  if(tree)
+    _printTree(tree);
 }
 
 static inline int max(int a, int b)
