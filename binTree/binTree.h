@@ -16,6 +16,8 @@ int size(struct binTree *tree);
 
 int height(struct binTree *tree);
 
+int leafCount(struct binTree*tree);
+
 int findValue(struct binTree *tree, int key);
 
 void addBinTree(struct binTree *tree, int key);

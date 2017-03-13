@@ -9,7 +9,7 @@ int main()
   addBinTree(tree, 17);
   addBinTree(tree, 0);
   addBinTree(tree, 2);
-  printf("%d\n", size(tree));
+  printf("%d\n", leafCount(tree));
   printTree(tree);
   printf("\n");
   supNode(tree, 9);
@@ -17,6 +17,17 @@ int main()
 //  printTree(tree);
   supNode(tree, 15);
 //  printTree(tree);
-  freeTree(tree);
+  freeTree(tree);/*
+
+
+  struct binTree *tree = newBinTree(5, NULL, NULL);
+  addBinTree(tree, 3);
+  addBinTree(tree, 6);
+  addBinTree(tree, 2);
+  addBinTree(tree, 7);
+  addBinTree(tree, 4);
+  supNode(tree, 3);
+  printTree(tree);
+  freeTree(tree);*/
   return 0;
 }

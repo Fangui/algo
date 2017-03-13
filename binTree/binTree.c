@@ -89,7 +89,17 @@ int height(struct binTree *t)
 {
   if(!t)
     return -1;
-  return max(1 + height(t->left), 1 + height(t->right));
+  return 1 + max(height(t->left), height(t->right));
+}
+
+int leafCount(struct binTree *t)
+{
+  if(!t)
+    return 0;
+
+  if(!t->left && !t->right)
+    return 1;
+  return leafCount(t->left) + leafCount(t->right);
 }
 
 int findValue(struct binTree *tree, int node)

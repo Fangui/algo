@@ -16,6 +16,8 @@ void addChildren(struct genTree *tree, struct genTree *insTree);
 
 size_t gt_size(struct genTree *tree);
 
+int gt_height(struct genTree *tree);
+
 void freeTree(struct genTree *tree);
 
 void printTree(struct genTree *tree);

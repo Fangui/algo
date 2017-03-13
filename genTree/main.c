@@ -10,8 +10,8 @@ int main()
   addChildren(tree3, tree4);
   addChildren(tree1, tree2);
   addChildren(tree1, tree3);
-  printf("%zu\n", gt_size(tree1))
-
+  printf("%zu\n", gt_size(tree1));
+  printf("%d\n", gt_height(tree1));
   printTree(tree1);
   freeTree(tree1);
 

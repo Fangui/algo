@@ -46,7 +46,7 @@ void* queue_pop(struct queue *queue)
   return elm;
 }
 
-void clearQueue(struct queue *queue)
+void freeQueue(struct queue *queue)
 {
   struct list *list = NULL;
   while(queue->size > 0)
@@ -56,4 +56,5 @@ void clearQueue(struct queue *queue)
     free(list);
     --queue->size;
   }
+  free(queue);
 }

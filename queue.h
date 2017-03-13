@@ -22,6 +22,6 @@ void queue_push(struct queue *queue, void *elm);
  
 void* queue_pop(struct queue *queue);
 
-void clearQueue(struct queue *queue);
+void freeQueue(struct queue *queue);
  
 # endif /* EPITA_S3_QUEUE_H_ */

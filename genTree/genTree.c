@@ -18,18 +18,25 @@ void addChildren(struct genTree *tree, struct genTree *insTree)
   ++tree->nbChildren;
 }
 
-static size_t _gt_size(struct genTree *tree)
-{
-  for(size_t i = 0; i < tree->nbChildren; ++i)
-    return 1 + gt_size(tree->children[i]);
-  return 1;
-}
-
 size_t gt_size(struct genTree *tree)
 {
-  if(tree)
-    return _gt_size(tree);
-  return 0;
+  size_t res = 1;
+  for(size_t i = 0; i < tree->nbChildren; ++i)
+    res += gt_size(tree->children[i]);
+  return res; 
+}
+
+static inline int max(int a, int b)
+{
+  return a > b ? a : b;
+}
+
+int gt_height(struct genTree *tree)
+{
+  int h = -1;
+  for(size_t i = 0; i < tree->nbChildren; ++i)
+    h += max(h, gt_height(tree->children[i]));
+  return h + 1;
 }
 
 void printTree(struct genTree *tree)
