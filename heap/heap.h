@@ -1,27 +1,7 @@
-# include "../queue.h"
+# include "vector.h"
 
-struct node
-{
-  int key;
-  struct node *parent;
-  struct node *lchild;
-  struct node *rchild;
-};
+void heapPush(struct vector *vect, int data);
 
-struct heap
-{
-  int size;
-  struct node *root;
-};
+int heapPop(struct vector *vect);
 
-struct heap *create_heap();
-
-struct node *find_node(struct heap *heap, int i);
-
-void add_key(struct heap *heap, int key);
-
-int pop(struct heap *heap);
-
-void delete_heap(struct heap *heap);
-
-void print(struct heap *heap);
+void heapSort(int *nums, int numsSize);

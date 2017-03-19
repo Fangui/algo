@@ -1,43 +1,55 @@
 # include "heap.h"
 
-/*
-static void swp(struct node *a, struct node *b)
+static void swap(int *a, int *b)
 {
-  int c = a->key;
-  a->key = b->key;
-  b->key = c;
-}*/
-
-struct heap *create_heap()
-{
-  struct heap *heap = calloc(1, sizeof(struct heap));
-  return heap;
+  int c = *a;
+  *a = *b;
+  *b = c;
 }
 
-struct node *find_node(struct heap *heap, int i)
+void heapPush(struct vector *vect, int data)
 {
-  struct node *node = NULL;
-  if(heap)
+  int size = vect->size, nSize = size / 2;
+  vector_push_back(vect, data);
+  while(size > 1 && data > vect->data[nSize])
   {
-    if(i > heap->size)
-      return NULL;
-    struct queue *queue = malloc(sizeof(struct queue));
-    queue_init(queue);
-    queue_push(queue, heap);
-    int cpt = 0;
-    while(cpt < i)
-    {
-      node = queue_pop(queue);
-      if(node->lchild)
-      {
-        queue_push(queue, node->lchild);
-        if(node->rchild)
-          queue_push(queue, node->rchild);
-      }
-    }
-    freeQueue(queue);
+    swap(&vect->data[size], &vect->data[nSize]);
+    size = nSize;
+    nSize /= 2;
   }
-  return node;
 }
 
+int heapPop(struct vector *vect)
+{
+  --vect->size;
+  swap(&vect->data[1], &vect->data[vect->size]);
 
+  int max = vect->data[vect->size];
+  int i = 1, j = 2;
+
+  while(j + 1 < vect->size)
+  {
+    if(vect->data[j] < vect->data[j + 1])
+      ++j;
+    if(vect->data[i] < vect->data[j])
+      swap(&vect->data[i], &vect->data[j]);
+    else
+      break;
+    i = j;
+    j *= 2;
+  }
+  if(j + 1 == vect->size && vect->data[j] > vect->data[i])
+    swap(&vect->data[j], &vect->data[i]);
+
+  return max;
+}
+
+void heapSort(int *nums, int numsSize)
+{
+  struct vector *vect = vector_make(numsSize + 1);
+  for(int i = 0; i < numsSize; ++i)
+    heapPush(vect, nums[i]);
+  for(int i = numsSize - 1; i >= 0; --i)
+    nums[i] = heapPop(vect);
+  freeVect(vect);
+}

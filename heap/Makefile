@@ -2,11 +2,11 @@ CC=gcc
  
 CPPFLAGS=
 
-CFLAGS= -Wall -Wextra -Werror -std=c99 -pedantic -o -g
+CFLAGS= -Wall -Wextra -Werror -std=c99 -pedantic -o -02
 LDFLAGS=
 LDLIBS= 
 
-SRC= ../queue.c heap.c 
+SRC= heap.c vector.c
 
 OBJ= ${SRC:.c=.o}
  
