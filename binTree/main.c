@@ -12,11 +12,12 @@ int main()
   printf("%d\n", leafCount(tree));
   printTree(tree);
   printf("\n");
-  supNode(tree, 9);
-  supNode(tree, 25);
+  tree = supNode(tree, 9);
+  tree = supNode(tree, 25);
 //  printTree(tree);
-  supNode(tree, 15);
-//  printTree(tree);
+  tree = supNode(tree, 15);
+  printTree(tree);
+  printf("\n");
   freeTree(tree);/*
 
 

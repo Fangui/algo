@@ -22,5 +22,5 @@ int findValue(struct binTree *tree, int key);
 
 void addBinTree(struct binTree *tree, int key);
 
-void supNode(struct binTree *tree, int key);
+struct binTree *supNode(struct binTree *tree, int key);
 

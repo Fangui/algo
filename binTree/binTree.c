@@ -26,6 +26,7 @@ int size(struct binTree *tree)
     return 1 + size(tree->left) + size(tree->right);
   return 0;
 }
+
 void p_bfs(struct binTree *tree)
 {
   struct binTree *node;
@@ -82,7 +83,7 @@ void printTree(struct binTree *tree)
 
 static inline int max(int a, int b)
 {
-  return a > b ? a : b;  
+  return a > b ? a : b;
 }
 
 int height(struct binTree *t)
@@ -143,42 +144,27 @@ void addBinTree(struct binTree *tree, int key)
   }
 }
 
-void supNode(struct binTree *tree, int key)
+struct binTree *supNode(struct binTree* root, int key)
 {
-  struct binTree *p = NULL;
-  while(tree)
+  if(!root)
+    return NULL;
+
+  if(key < root->key)
+    root->left = supNode(root->left, key);
+  else if(key > root->key)
+    root->right = supNode(root->right, key);
+  else
   {
-    if(key > tree->key)
-    {
-      p = tree;
-      tree = tree->right;
-    }
-    else if(key < tree->key)
-    {
-      p = tree;
-      tree = tree->left;
-    }
-    else
-    {
-      if(!p)
-      {
-        free(tree);
-        return;
-      }
-      struct binTree *del = tree;
-      if(key < p->key)
-        p->left = del->left;
-      else
-        p->right = del->left;
+    if(!root->left)
+      return root->right;
+    else if(!root->right)
+      return root->left;
 
-      for(p = del->left; p->right; p = p->right){}
-      p->right = del->right;
- 
-      free(del);
-      return;
-    }
+    struct binTree *node = root->right;
+    for(; node->left; node = node->left ){}
+    root->key = node->key;
+    root->right = supNode(root->right, root->key);
   }
+  return root;
 }
-
-
 
